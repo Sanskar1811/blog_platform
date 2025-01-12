@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Application by Sanskar</title>
+    <style>
+        /* General styles */
+        * {
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #eaeaea;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        /* Navigation bar */
+        .nav {
+            background-color: #333;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .nav a:hover {
+            background-color: #555;
+            transform: scale(1.05);
+        }
+
+        /* Center content */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px; /* Increased padding */
+            min-height: 500px; /* Set minimum height */
+            text-align: center;
+            background-color: lightyellow;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .nav a {
+                margin: 10px 0;
+                font-size: 16px;
+            }
+
+            .container {
+                padding: 20px;
+                min-height: 800px; /* Adjusted min-height for smaller screens */
+            }
+        }
+
+        @media (min-width: 768px) {
+            * {
+                font-size: 20px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            * {
+                font-size: 22px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            * {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            {% if user.is_authenticated %}
+                <a href="{% url 'ulogout' %}">Logout</a>
+                <a href="{% url 'ucp' %}">Change Password</a>
+                <a href="{% url 'uhome' %}">Home</a>
+            {% else %}
+                <a href="{% url 'ulogin' %}">Login</a>
+                <a href="{% url 'usignup' %}">Sign Up</a>
+            {% endif %}
+        </div>
+
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

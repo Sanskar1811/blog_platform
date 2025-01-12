@@ -1,0 +1,111 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<style>
+    /* Reset some basic elements */
+    body, h2, ul, li, a, p {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #4a4a4a;
+    }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #fafafa;
+    }
+
+    li a {
+        font-size: 2.1vw;
+        font-weight: bold;
+    }
+
+    li p {
+        margin-top: 10px;
+        color: #666;
+    }
+
+    a.create-post-btn {
+        display: inline-block;
+        margin-bottom: 20px;
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    a.create-post-btn:hover {
+        background-color: #0056b3;
+    }
+
+    @media (max-width: 600px) {
+        .container {
+            padding: 10px;
+        }
+
+        li {
+            padding: 10px;
+        }
+
+        a.create-post-btn {
+            padding: 8px 10px;
+        }
+    }
+
+    #anch {
+        font-size:3.3vw;
+        text-decoration: underline;
+    }
+
+</style>
+<a href="post/new" class="create-post-btn">Click here To Create Post</a>
+<br/>
+<h2>Blog Posts</h2>
+<ul>
+    {% for post in posts %}
+    <li>
+        <a id="anch" href="{% url 'post_detail' post.pk %}">{{ post.title }}</a> 
+        <small><small><small><small>by {{ post.author }} on {{ post.created_at }} </small></small></small></small>
+        <p>{{ post.content|truncatewords:30 }}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
